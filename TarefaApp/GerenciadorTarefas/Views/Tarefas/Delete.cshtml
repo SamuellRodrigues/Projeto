@@ -1,0 +1,79 @@
+@model GerenciadorTarefas.Models.Tarefa
+
+@{
+    ViewData["Title"] = "Excluir Tarefa";
+}
+
+<div class="main-card animate-fade-in">
+    <div class="main-header" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);">
+        <h1>🗑️ Excluir Tarefa</h1>
+        <p>Confirme a exclusão da tarefa selecionada</p>
+    </div>
+
+    <div style="padding: 2.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div>
+                <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-weight: 600; color: var(--gray-800);">
+                    Confirmação de Exclusão
+                </h2>
+                <p style="margin: 0.5rem 0 0; color: var(--gray-600);">
+                    Esta ação não pode ser desfeita
+                </p>
+            </div>
+            <a asp-action="Index" class="btn-outline-elegant">
+                <span>←</span>
+                Voltar
+            </a>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border: 2px solid #feb2b2; border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <span style="font-size: 2rem;">⚠️</span>
+                <div>
+                    <h4 style="margin: 0; color: #c53030; font-weight: 600;">Atenção!</h4>
+                    <p style="margin: 0; color: #9c2525;">Tem certeza que deseja excluir esta tarefa?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="task-card @(Model.Concluida ? "completed" : "")" style="max-width: 600px; margin: 0 auto 2rem;">
+            <div class="task-title">@Model.Titulo</div>
+            
+            @if (!string.IsNullOrEmpty(Model.Descricao))
+            {
+                <div class="task-content">@Model.Descricao</div>
+            }
+            
+            <div class="task-meta">
+                <div class="task-date">
+                    <span>📅</span>
+                    Criada em @Model.DataCriacao.ToString("dd/MM/yyyy 'às' HH:mm")
+                </div>
+                <div class="task-status @(Model.Concluida ? "completed" : "pending")">
+                    @if (Model.Concluida)
+                    {
+                        <span>✅ Concluída</span>
+                    }
+                    else
+                    {
+                        <span>⏳ Pendente</span>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <form asp-action="Delete" style="text-align: center;">
+            <input type="hidden" asp-for="Id" />
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a asp-action="Index" class="btn-outline-elegant">
+                    <span>❌</span>
+                    Não, manter tarefa
+                </a>
+                <button type="submit" class="btn-elegant btn-danger-elegant">
+                    <span>🗑️</span>
+                    Sim, excluir tarefa
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

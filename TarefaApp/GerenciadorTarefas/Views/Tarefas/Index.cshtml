@@ -1,0 +1,91 @@
+@model IEnumerable<GerenciadorTarefas.Models.Tarefa>
+
+@{
+    ViewData["Title"] = "Gerenciador de Tarefas";
+}
+
+<div class="main-card animate-fade-in">
+    <div class="main-header">
+        <h1>✨ Gerenciador de Tarefas</h1>
+        <p>Organize sua vida com elegância e simplicidade</p>
+    </div>
+
+    <div style="padding: 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gray-200);">
+        <div>
+            <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-weight: 600; color: var(--gray-800);">
+                Minhas Tarefas
+            </h2>
+            <p style="margin: 0.5rem 0 0; color: var(--gray-600);">
+                @if (Model.Any())
+                {
+                    var completed = Model.Count(t => t.Concluida);
+                    var total = Model.Count();
+                    <span>@completed de @total tarefas concluídas</span>
+                }
+                else
+                {
+                    <span>Nenhuma tarefa criada ainda</span>
+                }
+            </p>
+        </div>
+        <a asp-action="Create" class="btn-elegant">
+            <span>➕</span>
+            Nova Tarefa
+        </a>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="task-grid">
+            @foreach (var item in Model)
+            {
+                <div class="task-card @(item.Concluida ? "completed" : "") animate-fade-in">
+                    <div class="task-title">@Html.DisplayFor(modelItem => item.Titulo)</div>
+                    
+                    @if (!string.IsNullOrEmpty(item.Descricao))
+                    {
+                        <div class="task-content">@Html.DisplayFor(modelItem => item.Descricao)</div>
+                    }
+                    
+                    <div class="task-meta">
+                        <div class="task-date">
+                            <span>📅</span>
+                            @item.DataCriacao.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="task-status @(item.Concluida ? "completed" : "pending")">
+                            @if (item.Concluida)
+                            {
+                                <span>✅ Concluída</span>
+                            }
+                            else
+                            {
+                                <span>⏳ Pendente</span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="task-actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action btn-action-edit">
+                            ✏️ Editar
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action btn-action-delete">
+                            🗑️ Excluir
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="empty-state-icon">�</div>
+            <h3>Nenhuma tarefa encontrada</h3>
+            <p>Comece criando sua primeira tarefa para organizar seu dia</p>
+            <a asp-action="Create" class="btn-elegant">
+                <span>✨</span>
+                Criar Primeira Tarefa
+            </a>
+        </div>
+    }
+</div>

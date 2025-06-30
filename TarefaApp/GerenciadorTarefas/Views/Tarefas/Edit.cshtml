@@ -1,0 +1,74 @@
+@model GerenciadorTarefas.Models.Tarefa
+
+@{
+    ViewData["Title"] = "Editar Tarefa";
+}
+
+<div class="main-card animate-fade-in">
+    <div class="main-header">
+        <h1>✏️ Editar Tarefa</h1>
+        <p>Modifique os detalhes da sua tarefa</p>
+    </div>
+
+    <div class="form-elegant">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div>
+                <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-weight: 600; color: var(--gray-800);">
+                    Editando: @Model.Titulo
+                </h2>
+                <p style="margin: 0.5rem 0 0; color: var(--gray-600);">
+                    Criada em @Model.DataCriacao.ToString("dd/MM/yyyy 'às' HH:mm")
+                </p>
+            </div>
+            <a asp-action="Index" class="btn-outline-elegant">
+                <span>←</span>
+                Voltar
+            </a>
+        </div>
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group">
+                <label asp-for="Titulo" class="form-label">📌 Título da Tarefa</label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Descricao" class="form-label">📝 Descrição</label>
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DataCriacao" class="form-label">📅 Data de Criação</label>
+                <input asp-for="DataCriacao" class="form-control" readonly style="background: var(--gray-100); color: var(--gray-600);" />
+                <small style="color: var(--gray-600); font-size: 0.85rem;">Esta data não pode ser alterada</small>
+            </div>
+            
+            <div class="form-check">
+                <input class="form-check-input" asp-for="Concluida" type="checkbox" />
+                <label class="form-check-label" asp-for="Concluida">
+                    ✅ Marcar como concluída
+                </label>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                <a asp-action="Index" class="btn-outline-elegant">
+                    <span>❌</span>
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-elegant btn-success-elegant">
+                    <span>💾</span>
+                    Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

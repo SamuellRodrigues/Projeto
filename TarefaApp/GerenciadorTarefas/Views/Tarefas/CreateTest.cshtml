@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Teste de Criação";
+}
+
+<h1>Teste de Criação de Tarefa</h1>
+
+<form asp-action="CreateTest" method="post">
+    <div>
+        <label for="titulo">Título:</label>
+        <input type="text" name="titulo" id="titulo" required />
+    </div>
+    
+    <div>
+        <label for="descricao">Descrição:</label>
+        <textarea name="descricao" id="descricao"></textarea>
+    </div>
+    
+    <button type="submit">Criar Tarefa (Teste)</button>
+</form>
+
+<hr />
+<a href="/Tarefas">Voltar para Lista</a>
