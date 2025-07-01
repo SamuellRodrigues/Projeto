@@ -77,10 +77,10 @@ body {
     font-family: 'Playfair Display', serif !important;
     font-weight: 700 !important;
     font-size: 1.5rem !important;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
 }
 
 .nav-link {
@@ -93,8 +93,8 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color) !important;
-    background: rgba(102, 126, 234, 0.1) !important;
+    color: #f59e0b !important;
+    background: rgba(251, 191, 36, 0.1) !important;
     transform: translateY(-1px);
 }
 
@@ -110,7 +110,7 @@ body {
 }
 
 .main-header {
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
     color: white;
     padding: 2.5rem 2rem;
     text-align: center;
@@ -147,7 +147,7 @@ body {
 
 /* Botões Elegantes */
 .btn-elegant {
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
     color: white;
     border: none;
     border-radius: 50px;
@@ -213,7 +213,7 @@ body {
 }
 
 .btn-success-elegant {
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
 }
 
 /* Cards de Tarefas Elegantes */
